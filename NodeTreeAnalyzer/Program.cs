@@ -10,6 +10,7 @@ namespace NodeTreeAnalyzer
     {
         static void Main(string[] args)
         {
+            Console.WriteLine("TEST");
         }
     }
 }
