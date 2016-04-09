@@ -35,7 +35,7 @@ namespace NodeTreeAnalyzer.Logic.Describer
 
         }
 
-        public void DescribeByNodeType(Node node)
+        protected void DescribeByNodeType(Node node)
         {
             if (node != null)
             {

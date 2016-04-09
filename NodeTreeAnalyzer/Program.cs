@@ -7,6 +7,8 @@ using NodeTreeAnalyzer.Entities;
 using NodeTreeAnalyzer.Logic;
 using NodeTreeAnalyzer.Logic.Describer;
 using NodeTreeAnalyzer.Logic.Transformer;
+using NodeTreeAnalyzer.Logic.Writer;
+using System.IO;
 
 namespace NodeTreeAnalyzer
 {
@@ -28,6 +30,14 @@ namespace NodeTreeAnalyzer
             var transformedData=transformer.Transform(testData);
             var transformedresult=describer2.Describe(transformedData);
             Console.WriteLine(transformedresult);
+
+
+            INodeWriter writer = new FileNodeWriter();
+            var filePath = @"C:\Work\Repository\NodeTreeAnalyzer\test.txt";
+            writer.WriteToFileAsync(testData,filePath );
+            var persistedText = File.ReadAllText(filePath);
+            Console.WriteLine(persistedText);
+
             Console.Read();
 
         }
