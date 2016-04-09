@@ -4,17 +4,15 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{D04C6456-05C4-4229-8678-D1E19F511A7A}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <ProjectGuid>{65481EB8-A68B-4BC9-A5D4-6ECE66A5F817}</ProjectGuid>
+    <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>NodeTreeAnalyzer</RootNamespace>
-    <AssemblyName>NodeTreeAnalyzer</AssemblyName>
+    <RootNamespace>NodeTreeAnalyzer.Logic</RootNamespace>
+    <AssemblyName>NodeTreeAnalyzer.Logic</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -24,7 +22,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -43,20 +40,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Program.cs" />
+    <Compile Include="Describer\INodeDescriber.cs" />
+    <Compile Include="Describer\TextNodeDescriber.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.config" />
+    <Compile Include="Transformer\INodeTransformer.cs" />
+    <Compile Include="Transformer\TypeNodeTransformer.cs" />
+    <Compile Include="Writer\INodeWriter.cs" />
+    <Compile Include="Writer\FileNodeWriter.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\NodeTreeAnalyzer.Entities\NodeTreeAnalyzer.Entities.csproj">
       <Project>{11c74c86-4c88-46cb-97b1-13d2f220c240}</Project>
       <Name>NodeTreeAnalyzer.Entities</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\NodeTreeAnalyzer.Logic\NodeTreeAnalyzer.Logic.csproj">
-      <Project>{65481eb8-a68b-4bc9-a5d4-6ece66a5f817}</Project>
-      <Name>NodeTreeAnalyzer.Logic</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

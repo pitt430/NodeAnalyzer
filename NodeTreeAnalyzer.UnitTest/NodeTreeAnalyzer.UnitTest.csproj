@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{D04C6456-05C4-4229-8678-D1E19F511A7A}</ProjectGuid>
+    <ProjectGuid>{DB1DAFB9-A93A-48D5-92AA-25244E465064}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>NodeTreeAnalyzer</RootNamespace>
-    <AssemblyName>NodeTreeAnalyzer</AssemblyName>
+    <RootNamespace>NodeTreeAnalyzer.UnitTest</RootNamespace>
+    <AssemblyName>NodeTreeAnalyzer.UnitTest</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -48,16 +48,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\NodeTreeAnalyzer.Entities\NodeTreeAnalyzer.Entities.csproj">
-      <Project>{11c74c86-4c88-46cb-97b1-13d2f220c240}</Project>
-      <Name>NodeTreeAnalyzer.Entities</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\NodeTreeAnalyzer.Logic\NodeTreeAnalyzer.Logic.csproj">
-      <Project>{65481eb8-a68b-4bc9-a5d4-6ece66a5f817}</Project>
-      <Name>NodeTreeAnalyzer.Logic</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
