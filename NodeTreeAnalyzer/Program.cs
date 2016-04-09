@@ -24,8 +24,8 @@ namespace NodeTreeAnalyzer
 
 
             INodeDescriber describer2 = new TextNodeDescriber(4);
-            INodeTransformer transformer = new TypeNodeTransformer(testData);
-            var transformedData=transformer.Transform();
+            INodeTransformer transformer = new TypeNodeTransformer();
+            var transformedData=transformer.Transform(testData);
             var transformedresult=describer2.Describe(transformedData);
             Console.WriteLine(transformedresult);
             Console.Read();

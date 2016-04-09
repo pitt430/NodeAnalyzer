@@ -11,11 +11,10 @@ namespace NodeTreeAnalyzer.Logic.Transformer
 {
     public class TypeNodeTransformer : INodeTransformer
     {
-
         public Node Transform(Node node)
         {
-            CreateTransformedNode(node);
-            return node;
+
+            return CreateTransformedNode(node);
         }
 
         public Node CreateTransformedNode(Node originNode)
@@ -26,6 +25,7 @@ namespace NodeTreeAnalyzer.Logic.Transformer
             var isManyChild = false;
             var nodeCount = 0;
             var nodeName = string.Empty;
+            IList<Node> children;
 
             foreach (var propertyInfo in properties)
             {
@@ -43,27 +43,24 @@ namespace NodeTreeAnalyzer.Logic.Transformer
                             {
                                 if (item.GetType().Equals(nodeClassType) && item != null)
                                 {
-                                    var transformedNode=CreateTransformedNode(item);
-                                    propertyInfo.SetValue(originNode, Convert.ChangeType(item, propertyInfo.PropertyType), null);
                                     nodeCount++;
-
                                 }
                             }
                         }
 
                         if (propertyInfo.PropertyType.IsAssignableFrom(nodeClassType))
                         {
-                            var transformedNode = CreateTransformedNode(propertyValue as Node);
-                            propertyInfo.SetValue(originNode, propertyValue, null);
-                                  nodeCount++;
+                            nodeCount++;
                         }
                     }
                     else
                     {
                         nodeName = propertyValue.ToString();
                     }
-                }               
+                }
             }
+
+
 
             switch (nodeCount)
             {
@@ -71,17 +68,19 @@ namespace NodeTreeAnalyzer.Logic.Transformer
                     originNode = new NoChildrenNode(nodeName);
                     break;
                 case 1:
-                    originNode = new SingleChildNode(nodeName, properties[0].GetValue(originNode, null) as Node);
+                    originNode = new SingleChildNode(nodeName, CreateTransformedNode(properties[1].GetValue(originNode, null) as Node));
                     break;
                 case 2:
-                    originNode = new TwoChildrenNode(nodeName, (properties[0].GetValue(originNode, null) as Node), (properties[0].GetValue(originNode, null) as Node));
+                    originNode = new TwoChildrenNode(nodeName, CreateTransformedNode((properties[1].GetValue(originNode, null) as Node)), CreateTransformedNode((properties[2].GetValue(originNode, null) as Node)));
                     break;
 
-                default: break;
+                default:
+
+                    break;
             }
 
             return originNode;
-            
+
         }
     }
 }
