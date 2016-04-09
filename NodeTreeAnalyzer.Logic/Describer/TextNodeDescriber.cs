@@ -14,20 +14,27 @@ namespace NodeTreeAnalyzer.Logic.Describer
         private  int _level;
         private readonly int _indentSize;
         private readonly StringBuilder _stringBuilder;
-
+        private int _countNodeHasChildren;
         public TextNodeDescriber(int indentSize)
         {
             _indentSize = indentSize;
             _stringBuilder = new StringBuilder("result is:").AppendLine();
+            _countNodeHasChildren = 0;
         }
 
         public string Describe(Node node)
         {
-            return DescribeByNodeType(node);
+            DescribeByNodeType(node);
+            var result = _stringBuilder.ToString().TrimEnd().TrimEnd(',');
+            for (var i = 0; i < _countNodeHasChildren; i++)
+            {
+                result+=")";
+            }
+            return result;
 
         }
 
-        public string DescribeByNodeType(Node node)
+        public void DescribeByNodeType(Node node)
         {
             var nodeType = node.GetType();
             var nodeTypeName = nodeType.Name;
@@ -42,8 +49,9 @@ namespace NodeTreeAnalyzer.Logic.Describer
             else 
             {
                 Write("New {0}(\"{1}\",", nodeTypeName, nodeName);
+                _countNodeHasChildren++;
             }
-            
+                       
 
             foreach (var propertyInfo in properties)
             {
@@ -67,11 +75,6 @@ namespace NodeTreeAnalyzer.Logic.Describer
                 }
 
             }
-            for(var i = 0; i < _level/_indentSize; i++)
-            {
-                _stringBuilder.Append(")");
-            }
-            return _stringBuilder.ToString();
         }
 
         private void Write(string value, params object[] args)
