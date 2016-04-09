@@ -18,8 +18,9 @@ namespace NodeTreeAnalyzer.Logic.Describer
         public TextNodeDescriber(int indentSize)
         {
             _indentSize = indentSize;
-            _stringBuilder = new StringBuilder("result is:").AppendLine();
             _countNodeHasChildren = 0;
+            _stringBuilder = new StringBuilder("result is:").AppendLine();
+
         }
 
         public string Describe(Node node)
@@ -36,45 +37,50 @@ namespace NodeTreeAnalyzer.Logic.Describer
 
         public void DescribeByNodeType(Node node)
         {
-            var nodeType = node.GetType();
-            var nodeTypeName = nodeType.Name;
-            var nodeName = nodeType.GetProperty("Name").GetValue(node);
-            _level++;
+            if (node != null)
+            {
+                var nodeType = node.GetType();
+                var nodeTypeName = nodeType.Name;
+                var nodeName = nodeType.GetProperty("Name").GetValue(node);
+                _level++;
 
-            PropertyInfo[] properties = nodeType.GetProperties(BindingFlags.Public | BindingFlags.Instance);
-            if (properties.Length == 1)
-            {
-                Write("New {0}(\"{1}\"),", nodeTypeName, nodeName);
-            }
-            else 
-            {
-                Write("New {0}(\"{1}\",", nodeTypeName, nodeName);
-                _countNodeHasChildren++;
-            }
-                       
-
-            foreach (var propertyInfo in properties)
-            {
-                var propertyValue = propertyInfo.GetValue(node, null);
-                if (!(propertyValue is ValueType) && !(propertyValue is string))
+                PropertyInfo[] properties = nodeType.GetProperties(BindingFlags.Public | BindingFlags.Instance);
+                if (properties.Length == 1)
                 {
-                    var isEnumerable = typeof(IEnumerable).IsAssignableFrom(propertyInfo.PropertyType);
-                    if (isEnumerable)
-                    {
-                        foreach (var item in propertyValue as IEnumerable<Node>)
-                        {
-                            _level++;
-                            DescribeByNodeType(item);
-                            _level--;
-                        }
-                    }
-                    else
-                    {
-                        DescribeByNodeType(propertyValue as Node);
-                    }
+                    //the node is no child node if it only has one property which is Name
+                    Write("New {0}(\"{1}\"),", nodeTypeName, nodeName);
+                }
+                else
+                {
+                    //the node has children nodes if it has more than one properties
+                    Write("New {0}(\"{1}\",", nodeTypeName, nodeName);
+                    _countNodeHasChildren++;
                 }
 
+                foreach (var propertyInfo in properties)
+                {
+                    var propertyValue = propertyInfo.GetValue(node, null);
+                    if (!(propertyValue is ValueType) && !(propertyValue is string) && propertyValue!=null)
+                    {
+                        var isEnumerable = typeof(IEnumerable).IsAssignableFrom(propertyInfo.PropertyType);
+                        if (isEnumerable)
+                        {
+                            foreach (var item in propertyValue as IEnumerable<Node>)
+                            {
+                                _level++;
+                                DescribeByNodeType(item);
+                                _level--;
+                            }
+                        }
+                        else
+                        {
+                            DescribeByNodeType(propertyValue as Node);
+                        }
+                    }
+
+                }
             }
+            
         }
 
         private void Write(string value, params object[] args)
