@@ -15,11 +15,10 @@ namespace NodeTreeAnalyzer.UnitTest
     {
         private UnityContainer _container;
         [SetUp]
-        public void SetupContainer()
+        public void Init()
         {
             _container = new UnityContainer();
             _container.RegisterType(typeof(INodeDescriber), typeof(TextNodeDescriber));
-            var describer = _container.Resolve<TextNodeDescriber>();
         }
 
         [Test]
@@ -44,8 +43,30 @@ namespace NodeTreeAnalyzer.UnitTest
         {
             var describer = _container.Resolve<TextNodeDescriber>();
             var testData = new SingleChildNode("root", new NoChildrenNode("leaf1"));
-            var result = describer.Describe(null);
+            var result = describer.Describe(testData);
             Assert.IsTrue(result!=null && result.Contains("root") && result.Contains("leaf1"));
+        }
+
+        [Test]
+        public void Describe_TwoChildWithTwoLeaf_TwoChildWithTwoLeaf()
+        {
+            var describer = _container.Resolve<TextNodeDescriber>();
+            var testData = new TwoChildrenNode("root", 
+                new NoChildrenNode("leaf1"),
+                new NoChildrenNode("leaf2"));
+            var result = describer.Describe(testData);
+            Assert.IsTrue(result != null && result.Contains("root") && result.Contains("leaf1") && result.Contains("leaf2"));
+        }
+
+        [Test]
+        public void Describe_ManyChildWith3Leaf_ManyChildWith3Leaf()
+        {
+            var describer = _container.Resolve<TextNodeDescriber>();
+            var testData = new ManyChildrenNode("root",
+                new NoChildrenNode("leaf1"),
+                new NoChildrenNode("leaf2"), new NoChildrenNode("leaf3"));
+            var result = describer.Describe(testData);
+            Assert.IsTrue(result != null && result.Contains("root") && result.Contains("leaf1") && result.Contains("leaf2") && result.Contains("leaf3"));
         }
     }
 }

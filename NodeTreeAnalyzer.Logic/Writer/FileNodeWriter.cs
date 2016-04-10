@@ -18,12 +18,29 @@ namespace NodeTreeAnalyzer.Logic
         }
         public async Task WriteToFileAsync(Node node, string filePath)
         {
-            var describer = new TextNodeDescriber();
-            var txtResult = _nodeDescriber.Describe(node);
-            using (StreamWriter outputFile = new StreamWriter(filePath))
+            try
             {
-                await outputFile.WriteAsync(txtResult);
+
+                //Todo: create file and folder if not exists
+                if (!File.Exists(filePath))
+                {
+                    File.Create(filePath);
+                }
+                var txtResult = _nodeDescriber.Describe(node);
+                //todo: clear the file before write
+                using (StreamWriter outputFile = File.AppendText(filePath))
+                {
+                    await outputFile.WriteAsync(txtResult);
+                }
             }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+
+
+
         }
     }
 }

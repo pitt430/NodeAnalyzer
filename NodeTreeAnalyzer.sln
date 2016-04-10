@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NodeTreeAnalyzer.Entities",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NodeTreeAnalyzer.Logic", "NodeTreeAnalyzer.Logic\NodeTreeAnalyzer.Logic.csproj", "{65481EB8-A68B-4BC9-A5D4-6ECE66A5F817}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NodeTreeAnalyzer.IntegrationTest", "NodeTreeAnalyzer.IntegrationTest\NodeTreeAnalyzer.IntegrationTest.csproj", "{B876D91C-AD7D-4413-9174-F6597B3F459F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{65481EB8-A68B-4BC9-A5D4-6ECE66A5F817}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{65481EB8-A68B-4BC9-A5D4-6ECE66A5F817}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{65481EB8-A68B-4BC9-A5D4-6ECE66A5F817}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B876D91C-AD7D-4413-9174-F6597B3F459F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B876D91C-AD7D-4413-9174-F6597B3F459F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B876D91C-AD7D-4413-9174-F6597B3F459F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B876D91C-AD7D-4413-9174-F6597B3F459F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

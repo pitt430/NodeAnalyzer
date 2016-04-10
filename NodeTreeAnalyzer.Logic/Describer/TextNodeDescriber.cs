@@ -22,12 +22,17 @@ namespace NodeTreeAnalyzer.Logic
 
         public string Describe(Node node)
         {
-            DescribeByNodeType(node);
-            var result = _stringBuilder.ToString().TrimEnd().TrimEnd(',');
-            for (var i = 0; i < _countNodeHasChildren; i++)
+            var result = string.Empty;
+            if (node != null)
             {
-                result+=")";
+                DescribeByNodeType(node);
+                result = _stringBuilder.ToString().TrimEnd().TrimEnd(',');
+                for (var i = 0; i < _countNodeHasChildren; i++)
+                {
+                    result += ")";
+                }
             }
+
             return result;
 
         }

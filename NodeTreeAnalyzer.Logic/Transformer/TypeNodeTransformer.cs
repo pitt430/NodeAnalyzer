@@ -13,11 +13,16 @@ namespace NodeTreeAnalyzer.Logic
     {
         public Node Transform(Node node)
         {
-            return CreateTransformedNode(node);
+            if (node != null)
+            {
+                return CreateTransformedNode(node);
+            }
+            return null;
         }
 
         public Node CreateTransformedNode(Node originNode)
         {
+            var myList = new List<Node>();
             var nodeType = originNode.GetType();
             //Check the real type of node
             var properties = nodeType.GetProperties(BindingFlags.Public | BindingFlags.Instance);
@@ -39,16 +44,18 @@ namespace NodeTreeAnalyzer.Logic
                         {
                             foreach (var item in propertyValue as IEnumerable<Node>)
                             {
-                                if (item.GetType().Equals(nodeClassType) && item != null)
+                                if (  item != null && nodeClassType.IsAssignableFrom(item.GetType()))
                                 {
                                     nodeCount++;
+                                    myList.Add(item);
                                 }
                             }
                         }
 
-                        if (propertyInfo.PropertyType.IsAssignableFrom(nodeClassType))
+                        if (nodeClassType.IsAssignableFrom(propertyInfo.PropertyType))
                         {
                             nodeCount++;
+                            myList.Add(propertyValue as Node);
                         }
                     }
                     else
@@ -66,10 +73,10 @@ namespace NodeTreeAnalyzer.Logic
                     originNode = new NoChildrenNode(nodeName);
                     break;
                 case 1:
-                    originNode = new SingleChildNode(nodeName, CreateTransformedNode(properties[1].GetValue(originNode, null) as Node));
+                    originNode = new SingleChildNode(nodeName, CreateTransformedNode(myList[0]));
                     break;
                 case 2:
-                    originNode = new TwoChildrenNode(nodeName, CreateTransformedNode((properties[1].GetValue(originNode, null) as Node)), CreateTransformedNode((properties[2].GetValue(originNode, null) as Node)));
+                    originNode = new TwoChildrenNode(nodeName, CreateTransformedNode(myList[0]), CreateTransformedNode(myList[1]));
                     break;
 
                 default:
