@@ -7,13 +7,12 @@ using NodeTreeAnalyzer.Entities;
 using System.Reflection;
 using System.Collections;
 
-namespace NodeTreeAnalyzer.Logic.Transformer
+namespace NodeTreeAnalyzer.Logic
 {
     public class TypeNodeTransformer : INodeTransformer
     {
         public Node Transform(Node node)
         {
-
             return CreateTransformedNode(node);
         }
 
@@ -25,7 +24,6 @@ namespace NodeTreeAnalyzer.Logic.Transformer
             var isManyChild = false;
             var nodeCount = 0;
             var nodeName = string.Empty;
-            IList<Node> children;
 
             foreach (var propertyInfo in properties)
             {

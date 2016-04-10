@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using NodeTreeAnalyzer.Entities;
 
-namespace NodeTreeAnalyzer.Logic.Describer
+namespace NodeTreeAnalyzer.Logic
 {
     public interface INodeDescriber
     {

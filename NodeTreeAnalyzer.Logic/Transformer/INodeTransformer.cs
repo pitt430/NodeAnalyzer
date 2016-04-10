@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using NodeTreeAnalyzer.Entities;
 
 
-namespace NodeTreeAnalyzer.Logic.Transformer
+namespace NodeTreeAnalyzer.Logic
 {
     public interface INodeTransformer
     {

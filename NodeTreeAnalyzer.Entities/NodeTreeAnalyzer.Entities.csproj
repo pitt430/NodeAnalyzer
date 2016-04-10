@@ -40,16 +40,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ManyChildrenNode.cs" />
-    <Compile Include="NoChildrenNode.cs" />
-    <Compile Include="Node.cs" />
+    <Compile Include="Node\ManyChildrenNode.cs" />
+    <Compile Include="Node\NoChildrenNode.cs" />
+    <Compile Include="Node\Node.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SingleChildNode.cs" />
-    <Compile Include="TwoChildrenNode.cs" />
+    <Compile Include="Node\SingleChildNode.cs" />
+    <Compile Include="Node\TwoChildrenNode.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Node\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

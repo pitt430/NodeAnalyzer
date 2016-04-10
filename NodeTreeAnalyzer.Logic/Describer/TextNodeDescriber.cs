@@ -7,20 +7,17 @@ using NodeTreeAnalyzer.Entities;
 using System.Collections;
 using System.Reflection;
 
-namespace NodeTreeAnalyzer.Logic.Describer
+namespace NodeTreeAnalyzer.Logic
 {
-    public class TextNodeDescriber : INodeDescriber
+    public class TextNodeDescriber : DescriberBase, INodeDescriber
     {
         private  int _level;
-        private readonly int _indentSize;
         private readonly StringBuilder _stringBuilder;
         private int _countNodeHasChildren;
-        public TextNodeDescriber(int indentSize)
+        public TextNodeDescriber()
         {
-            _indentSize = indentSize;
             _countNodeHasChildren = 0;
             _stringBuilder = new StringBuilder("result is:").AppendLine();
-
         }
 
         public string Describe(Node node)
@@ -85,7 +82,7 @@ namespace NodeTreeAnalyzer.Logic.Describer
 
         private void Write(string value, params object[] args)
         {
-            var space = new string(' ', _level * _indentSize);
+            var space = new string(' ', _level * IndentSize);
 
             if (args != null)
                 value = string.Format(value, args);
